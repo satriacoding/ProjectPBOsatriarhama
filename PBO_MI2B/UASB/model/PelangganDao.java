@@ -13,9 +13,9 @@ import java.util.List;
  * @author satri
  */
 public interface PelangganDao {
-  void save (Pelanggan pelanggan);
-    void update (int index, Pelanggan pelanggan);
-    void delete (int index);
+    Pelanggan save (Pelanggan pelanggan);
+    Pelanggan update (int index, Pelanggan pelanggan);
+    Pelanggan delete (int index);
     Pelanggan getPelanggan(int index);
     List<Pelanggan> getAllPelanggan();
 }
