@@ -9,6 +9,7 @@ package UASB.model;
  *
  * @author satri
  */
+
 public class Warnet {
     private String kodepelanggan;
     private String nama;
@@ -20,6 +21,17 @@ public class Warnet {
     private int tarif;
     private int total;
 
+    
+    public Warnet() {
+    }
+
+    public Warnet(  String tglmasuk, String jammasuk, String jamkeluar, int tarif) {
+        this.tglmasuk = tglmasuk;
+        this.jammasuk = jammasuk;
+        this.jamkeluar = jamkeluar;
+        this.tarif = tarif;
+    }
+    
     public String getKodepelanggan() {
         return kodepelanggan;
     }
@@ -91,5 +103,6 @@ public class Warnet {
     public void setNama(String nama) {
         this.nama = nama;
     }
+
     
 }
