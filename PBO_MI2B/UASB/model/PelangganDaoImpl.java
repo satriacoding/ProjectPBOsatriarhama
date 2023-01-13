@@ -24,32 +24,43 @@ import java.util.List;
 public class PelangganDaoImpl implements PelangganDao {
      private List<Pelanggan> data = new ArrayList<>();
 
-    public PelangganDaoImpl() {
-    }
     
 
-    @Override
-    public void save(Pelanggan pelanggan) {
-                data.add(pelanggan);
+    public PelangganDaoImpl() {
+     data.add(new Pelanggan("2002","Satria cantik",1));
+        data.add(new Pelanggan("2003","Satria cantik",2));
+        data.add(new Pelanggan("2004","Satria cantik",1));
+    }
+    
+    
+    public Pelanggan save(Pelanggan pelanggan) {
+        data.add(pelanggan);
+        return pelanggan;
     }
 
-    @Override
-    public void update(int index, Pelanggan pelanggan) {
-                data.set(index, pelanggan);
+    
+    public Pelanggan update(int index, Pelanggan pelanggan) {
+    data.set(index,pelanggan);
+        return pelanggan;
     }
 
-    @Override
-    public void delete(int index) {
-         data.remove(index);
+    public Pelanggan delete(int index) {
+        return data.remove(index);
+
     }
 
-    @Override
+    
     public Pelanggan getPelanggan(int index) {
         return data.get(index);
     }
 
-    @Override
     public List<Pelanggan> getAllPelanggan() {
         return data;
     }
+
+  
+    
+    
+    
+    
 }
