@@ -7,6 +7,7 @@ package UASB.view;
 
 import UASB.controller.WarnetController;
 import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -21,9 +22,11 @@ public class FormWarnet extends javax.swing.JFrame {
      */
     public FormWarnet() {
         initComponents();
-        controller = new WarnetController(this);
+       controller = new WarnetController(this);
         controller.clearForm();
         controller.viewTable();
+        controller.setCboKode();
+        controller.setCboNama();
     }
 
     public JTextField getTxtJamKeluar() {
@@ -32,10 +35,6 @@ public class FormWarnet extends javax.swing.JFrame {
 
     public JTextField getTxtJamMasuk() {
         return txtJamMasuk;
-    }
-
-    public JTextField getTxtKodePel() {
-        return txtKodePel;
     }
 
     public JTextField getTxtTgl() {
@@ -50,33 +49,37 @@ public class FormWarnet extends javax.swing.JFrame {
         return tabelWarnet;
     }
 
+    public JTextField getTxtjen() {
+        return txtjen;
+    }
+
 
     public JTextField getTxtTarif() {
         return txtTarif;
     }
 
-    public JTextField getTxtJenisPelanggan() {
-        return txtJenisPelanggan;
-    }
-
+  
     public JTextField getTxtLama() {
         return txtLama;
-    }
-
-    public JTextField getTxtNamaPel() {
-        return txtNamaPel;
     }
 
     public JTextField getTxtIndex() {
         return txtIndex;
     }
+
+    public JComboBox<String> getCboKode() {
+        return cboKode;
+    }
+
+    public JComboBox<String> getCboNama() {
+        return cboNama;
+    }
     
     
     
     
     
-    
-    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,7 +96,6 @@ public class FormWarnet extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtTarif = new javax.swing.JTextField();
-        txtNamaPel = new javax.swing.JTextField();
         txtTgl = new javax.swing.JTextField();
         txtLama = new javax.swing.JTextField();
         txtJamKeluar = new javax.swing.JTextField();
@@ -105,16 +107,17 @@ public class FormWarnet extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtJenisPelanggan = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtJamMasuk = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txtKodePel = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtIndex = new javax.swing.JTextField();
+        cboKode = new javax.swing.JComboBox<>();
+        cboNama = new javax.swing.JComboBox<>();
+        txtjen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -142,8 +145,6 @@ public class FormWarnet extends javax.swing.JFrame {
         txtTarif.setText("jTextField1");
         getContentPane().add(txtTarif);
         txtTarif.setBounds(240, 190, 130, 30);
-        getContentPane().add(txtNamaPel);
-        txtNamaPel.setBounds(410, 10, 130, 30);
 
         txtTgl.setText("jTextField1");
         txtTgl.addActionListener(new java.awt.event.ActionListener() {
@@ -229,15 +230,6 @@ public class FormWarnet extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(70, 230, 90, 30);
 
-        txtJenisPelanggan.setText("jTextField1");
-        txtJenisPelanggan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtJenisPelangganKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtJenisPelanggan);
-        txtJenisPelanggan.setBounds(240, 230, 130, 30);
-
         jLabel8.setText("Tanggal Masuk");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(70, 70, 90, 30);
@@ -282,19 +274,6 @@ public class FormWarnet extends javax.swing.JFrame {
         getContentPane().add(jLabel9);
         jLabel9.setBounds(20, 10, 90, 30);
 
-        txtKodePel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtKodePelActionPerformed(evt);
-            }
-        });
-        txtKodePel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtKodePelKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtKodePel);
-        txtKodePel.setBounds(120, 10, 130, 30);
-
         jLabel10.setText("Index");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(400, 280, 40, 14);
@@ -302,6 +281,23 @@ public class FormWarnet extends javax.swing.JFrame {
         txtIndex.setText("jTextField1");
         getContentPane().add(txtIndex);
         txtIndex.setBounds(440, 270, 130, 30);
+
+        cboKode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cboKode);
+        cboKode.setBounds(110, 10, 160, 30);
+
+        cboNama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cboNama);
+        cboNama.setBounds(420, 10, 150, 30);
+
+        txtjen.setText("jTextField1");
+        txtjen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtjenKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtjen);
+        txtjen.setBounds(240, 230, 130, 30);
 
         setBounds(0, 0, 606, 740);
     }// </editor-fold>//GEN-END:initComponents
@@ -317,7 +313,7 @@ public class FormWarnet extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJamKeluarActionPerformed
 
     private void txtJamKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJamKeluarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+          if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             controller.lama();
             //controller.tunjangan();
         }
@@ -344,14 +340,6 @@ public class FormWarnet extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJamMasukKeyPressed
 
-    private void txtJenisPelangganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJenisPelangganKeyPressed
-        // TODO add your handling code here:
-          if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            controller.total();
-            //controller.tunjangan();
-        }
-    }//GEN-LAST:event_txtJenisPelangganKeyPressed
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         controller.deleteWarnet();
@@ -372,21 +360,18 @@ public class FormWarnet extends javax.swing.JFrame {
         controller.viewTable();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void txtKodePelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKodePelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtKodePelActionPerformed
-
-    private void txtKodePelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKodePelKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-//            controller.tampilNamaPelanggan();
-            //controller.tunjangan();
-        }
-    }//GEN-LAST:event_txtKodePelKeyPressed
-
     private void txtTglActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTglActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTglActionPerformed
+
+    private void txtjenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtjenKeyPressed
+       if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            controller.total();
+            //controller.tunjangan();
+        }
+              
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtjenKeyPressed
 
     /**
      * @param args the command line arguments
@@ -430,6 +415,8 @@ public class FormWarnet extends javax.swing.JFrame {
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cboKode;
+    private javax.swing.JComboBox<String> cboNama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -445,12 +432,10 @@ public class FormWarnet extends javax.swing.JFrame {
     private javax.swing.JTextField txtIndex;
     private javax.swing.JTextField txtJamKeluar;
     private javax.swing.JTextField txtJamMasuk;
-    private javax.swing.JTextField txtJenisPelanggan;
-    private javax.swing.JTextField txtKodePel;
     private javax.swing.JTextField txtLama;
-    private javax.swing.JTextField txtNamaPel;
     private javax.swing.JTextField txtTarif;
     private javax.swing.JTextField txtTgl;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtjen;
     // End of variables declaration//GEN-END:variables
 }
