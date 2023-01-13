@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package UASB.controller;
+import UASB.model.PelangganDao;
 import UASB.model.PelangganDaoImpl;
 import UASB.view.FormWarnet;
 import UASB.model.WarnetDao;
@@ -25,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author USER
  */
 public class WarnetController {
+     private PelangganDao pelangganDao;
      private FormWarnet formWarnet;
      private WarnetDao WarnetDao;
      private Warnet warnet;
@@ -32,31 +34,33 @@ public class WarnetController {
     public WarnetController(FormWarnet view) {
         this.formWarnet = view;
         WarnetDao = new WarnetDaoImpl();
+        pelangganDao = new PelangganDaoImpl();
+
     }
     
      public void clearForm(){
-        formWarnet.getTxtKodePel().setText("");
-        formWarnet.getTxtNamaPel().setText("");
         formWarnet.getTxtTgl().setText("");
         formWarnet.getTxtJamMasuk().setText("");
         formWarnet.getTxtJamKeluar().setText("");
+        formWarnet.getTxtjen().setText("");
         formWarnet.getTxtLama().setText("");
         formWarnet.getTxtTarif().setText("");
-        formWarnet.getTxtJenisPelanggan().setText("");
         formWarnet.getTxtTotal().setText("");
         formWarnet.getTxtIndex().setText("");
 
     }
       public void saveWarnet(){
         warnet = new Warnet();
-        warnet.setKodepelanggan(formWarnet.getTxtKodePel().getText());
-        warnet.setNama(formWarnet.getTxtNamaPel().getText());
+        warnet.setKodepelanggan(formWarnet.getCboKode()
+                .getSelectedItem().toString());       
+        warnet.setNama(formWarnet.getCboNama()
+                .getSelectedItem().toString());       
         warnet.setTglmasuk(formWarnet.getTxtTgl().getText());
         warnet.setJammasuk(formWarnet.getTxtJamMasuk().getText());
         warnet.setJamkeluar(formWarnet.getTxtJamKeluar().getText());
         warnet.setTarif(Integer.parseInt(formWarnet.getTxtTarif().getText()));
         warnet.setTotal(Integer.parseInt(formWarnet.getTxtTotal().getText()));
-        warnet.setJenispelanggan(Integer.parseInt(formWarnet.getTxtJenisPelanggan().getText()));
+        warnet.setJenispelanggan(Integer.parseInt(formWarnet.getTxtjen().getText()));    
         warnet.setLama(Integer.parseInt(formWarnet.getTxtLama().getText()));
         WarnetDao.save(warnet);
         javax.swing.JOptionPane.showMessageDialog(formWarnet, "Entri Ok");
@@ -65,13 +69,11 @@ public class WarnetController {
         int index = formWarnet.getTabelWarnet().getSelectedRow();
         warnet = WarnetDao.getWarnet(index);
         if(warnet != null){
-            formWarnet.getTxtKodePel().setText(warnet.getKodepelanggan());
-            formWarnet.getTxtNamaPel().setText(String.valueOf(warnet.getNama()));
-            formWarnet.getTxtJenisPelanggan().setText(String.valueOf(warnet.getJenispelanggan()));
             formWarnet.getTxtTgl().setText(warnet.getTglmasuk());
             formWarnet.getTxtJamMasuk().setText(warnet.getJamkeluar());
             formWarnet.getTxtJamKeluar().setText(warnet.getJamkeluar());
             formWarnet.getTxtTarif().setText(String.valueOf(warnet.getTarif()));
+            formWarnet.getTxtjen().setText(String.valueOf(warnet.getJenispelanggan()));
             formWarnet.getTxtTotal().setText(String.valueOf(warnet.getTotal()));
             formWarnet.getTxtLama().setText(String.valueOf(warnet.getLama()));
 
@@ -80,14 +82,16 @@ public class WarnetController {
     
     public void updateWarnet(){
         int index = formWarnet.getTabelWarnet().getSelectedRow();
-        warnet.setKodepelanggan(formWarnet.getTxtKodePel().getText());
-        warnet.setNama(formWarnet.getTxtNamaPel().getText());
+        warnet.setKodepelanggan(formWarnet.getCboKode()
+                .getSelectedItem().toString());       
+        warnet.setNama(formWarnet.getCboNama()
+                .getSelectedItem().toString());       
         warnet.setTglmasuk(formWarnet.getTxtTgl().getText());
         warnet.setJammasuk(formWarnet.getTxtJamMasuk().getText());
         warnet.setJamkeluar(formWarnet.getTxtJamKeluar().getText());
         warnet.setTarif(Integer.parseInt(formWarnet.getTxtTarif().getText()));
         warnet.setTotal(Integer.parseInt(formWarnet.getTxtTotal().getText()));
-        warnet.setJenispelanggan(Integer.parseInt(formWarnet.getTxtJenisPelanggan().getText()));
+        warnet.setJenispelanggan(Integer.parseInt(formWarnet.getTxtjen().getText()));
         warnet.setLama(Integer.parseInt(formWarnet.getTxtLama().getText()));
         WarnetDao.update(index, warnet);
         javax.swing.JOptionPane.showMessageDialog(formWarnet, "Update Ok");
@@ -103,13 +107,13 @@ public class WarnetController {
         int index = Integer.parseInt(formWarnet.getTxtIndex().getText());
         warnet = WarnetDao.getWarnet(index);
         if(warnet!=null){
-           formWarnet.getTxtKodePel().setText(warnet.getKodepelanggan());
-            formWarnet.getTxtNamaPel().setText(String.valueOf(warnet.getNama()));
-            formWarnet.getTxtJenisPelanggan().setText(String.valueOf(warnet.getJenispelanggan()));
+            formWarnet.getCboKode().setSelectedItem(warnet.getKodepelanggan());
+            formWarnet.getCboNama().setSelectedItem(warnet.getNama());
             formWarnet.getTxtTgl().setText(warnet.getTglmasuk());
             formWarnet.getTxtJamMasuk().setText(warnet.getJamkeluar());
             formWarnet.getTxtJamKeluar().setText(warnet.getJamkeluar());
             formWarnet.getTxtTarif().setText(String.valueOf(warnet.getTarif()));
+            formWarnet.getTxtjen().setText(String.valueOf(warnet.getJenispelanggan()));
             formWarnet.getTxtTotal().setText(String.valueOf(warnet.getTotal()));
             formWarnet.getTxtLama().setText(String.valueOf(warnet.getLama()));
         }else{
@@ -140,7 +144,7 @@ public class WarnetController {
         }
       }
       public void total(){
-          int jenispel = Integer.parseInt(formWarnet.getTxtJenisPelanggan().getText());
+          int jenispel = Integer.parseInt((String) formWarnet.getCboKode().getSelectedItem());
           int tarif = Integer.parseInt(formWarnet.getTxtTarif().getText());
           int lama = Integer.parseInt(formWarnet.getTxtLama().getText());
           double diskon = 0;
@@ -179,5 +183,25 @@ public class WarnetController {
         } catch (Exception ex) {
             Logger.getLogger(WarnetController.class.getName()).log(Level.SEVERE, null, ex);
         }   
-    }     
+    }  
+      
+       public void setCboKode(){
+        formWarnet.getCboKode().removeAllItems();
+        List<Pelanggan> list= pelangganDao.getAllPelanggan();
+        for(Pelanggan pelanggan : list){
+            formWarnet.getCboKode().
+                    addItem(pelanggan.getKode());
+        } 
+    }
+    
+     public void setCboNama(){
+        formWarnet.getCboNama().removeAllItems();
+        List<Pelanggan> list= pelangganDao.getAllPelanggan();
+        for(Pelanggan pelanggan : list){
+            formWarnet.getCboNama().
+                    addItem(pelanggan.getNama());
+        } 
+    }
+     
+
 }
