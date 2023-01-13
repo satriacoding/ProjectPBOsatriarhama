@@ -13,9 +13,9 @@ import java.util.List;
  * @author satri
  */
 public interface WarnetDao {
-    void save (Warnet warnet);
-    void update (int index, Warnet warnet);
-    void delete (int index);
+    Warnet save (Warnet warnet);
+    Warnet update (int index, Warnet warnet);
+    Warnet delete (int index);
     Warnet getWarnet(int index);
     List<Warnet> getAllWarnet();
 }
