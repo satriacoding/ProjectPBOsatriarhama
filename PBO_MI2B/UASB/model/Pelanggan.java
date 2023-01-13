@@ -13,6 +13,16 @@ public class Pelanggan {
     private String kode;
     private String nama;
     private int jenispelanggan;
+    
+    public Pelanggan() {
+    
+    }
+    
+    public Pelanggan(String kode, String nama, int jenispelanggan) {
+        this.kode = kode;
+        this.nama = nama;
+        this.jenispelanggan = jenispelanggan;
+    }
 
     public String getKode() {
         return kode;
