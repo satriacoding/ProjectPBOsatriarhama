@@ -26,6 +26,7 @@ public class PelangganController {
     public PelangganController(FormPelanggan view) {
         this.FormPelanggan = view;
         PelangganDao = new PelangganDaoImpl();
+        
     }
     
      public void clearForm(){
