@@ -22,37 +22,32 @@ public class WarnetDaoImpl implements WarnetDao {
     private List<Warnet> data = new ArrayList<>();
 
     public WarnetDaoImpl() {
+      data.add(new Warnet("2002-02-23","10:00:00","09:00:00",100000));
+      data.add(new Warnet("2002-02-24","11:00:00","12:00:00",140000));
+      data.add(new Warnet("2002-02-13","02:00:00","08:00:00",240000));
+
+
+    }
+  public Warnet save(Warnet warnet){
+        data.add(warnet);
+        return warnet;
     }
     
-
-    @Override
-    public void save(Warnet warnet) {
-                data.add(warnet);
-
+    public Warnet update(int index,Warnet warnet){
+        data.set(index,warnet);
+        return warnet;
     }
-
-    @Override
-    public void update(int index, Warnet warnet) {
-                data.set(index, warnet);
-
+    
+    public Warnet delete(int index){
+        return data.remove(index);
     }
-
-    @Override
-    public void delete(int index) {
-         data.remove(index);
-    }
-
-    @Override
-    public Warnet getWarnet(int index) {
+    
+    public Warnet  getWarnet(int index){
         return data.get(index);
-
     }
-
-    @Override
-    public List<Warnet> getAllWarnet() {
+    
+    public List<Warnet> getAllWarnet(){
         return data;
-
     }
-
    
 }
